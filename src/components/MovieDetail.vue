@@ -97,8 +97,13 @@
                 <br v-if="movieDetails.Type === 'series'" />
                 <p>Plot: {{ movieDetails.Plot }}</p>
                 <div class="d-flex flex-sm-row">
-                  <span class="mr-1 d-xs-none">Rating: </span
-                  ><Rating v-model="rating" readonly :cancel="false" />
+                  <span class="mr-1 d-xs-none">Rating: </span>
+                  <Rating v-model="rating" readonly :cancel="false" />
+                  <!-- <v-rating
+                    v-model="rating"
+                    bg-color="orange-lighten-1"
+                    color="blue"
+                  ></v-rating> -->
                 </div>
               </div>
             </template>
@@ -137,6 +142,7 @@ export default {
           this.rating = this.movieDetails.imdbRating / 2;
           this.isSearched = true;
           this.showTitle = false;
+          console.log(this.rating);
         });
     },
     getTitle() {
@@ -164,9 +170,11 @@ export default {
         )
         .then((response) => {
           this.movieDetails = response.data;
+          this.rating = this.movieDetails.imdbRating / 2;
           this.isSearched = true;
           this.showTitle = false;
           console.log(this.isSearched);
+          console.log(this.rating);
         });
     },
   },
